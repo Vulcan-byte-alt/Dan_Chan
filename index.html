@@ -705,10 +705,140 @@
             border: none;
             /* Remove any default iframe borders */
         }
+
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .mentalism-loader {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .crystal-ball {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(251, 191, 36, 0.1));
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+            animation: glow 2s infinite;
+        }
+
+        .crystal-ball::after {
+            content: '🔮';
+            font-size: 80px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .loader-text {
+            text-align: center;
+            color: var(--primary-color);
+            font-family: 'Cormorant', serif;
+            animation: fadeInOut 2s infinite;
+        }
+
+        .loader-quote {
+            max-width: 80%;
+            text-align: center;
+            color: white;
+            font-style: italic;
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(251, 191, 36, 0.6);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) translateY(0);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) translateY(-10px);
+            }
+        }
+
+        @keyframes fadeInOut {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .social-links {
+                position: absolute;
+                bottom: 2rem;
+                right: auto;
+                top: auto;
+                transform: none;
+                flex-direction: row;
+                width: 100%;
+                justify-content: center;
+                gap: 2rem;
+            }
+        }
+
+        /* Loader styles */
+        .loader-container {
+            /* ... other styles ... */
+            transition: transform 0.8s ease-in-out;
+            /* Transition for the slide-up */
+        }
+
+        .loader-curtain.slide-up {
+            transform: translateY(-100%);
+            /* Slide the loader up */
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- Loader -->
+    <div class="loader-container loader-curtain">
+        <div class="mentalism-loader">
+            <div class="crystal-ball"></div>
+        </div>
+        <div class="loader-text text-2xl">Reading your mind...</div>
+        <div class="loader-quote text-sm">"The real secret of magic lies in the performance." - David Copperfield</div>
+    </div>
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
@@ -791,8 +921,9 @@
                 <div class="container">
                     <div class="aspect-video">
                         <iframe class="w-full h-full"
-                            src="https://www.youtube.com/embed/JaO7S65OqE8?autoplay=1&mute=1&controls=0&loop=1&playlist=JaO7S65OqE8" frameborder="0"
-                            allow="autoplay; encrypted-media" style="box-shadow: 0 40px 40px rgba(184, 134, 11, 0.2);">
+                            src="https://www.youtube.com/embed/JaO7S65OqE8?autoplay=1&mute=1&controls=0&loop=1&playlist=JaO7S65OqE8"
+                            frameborder="0" allow="autoplay; encrypted-media"
+                            style="box-shadow: 0 40px 40px rgba(184, 134, 11, 0.2);">
                         </iframe>
                     </div>
                 </div>
@@ -848,8 +979,9 @@
                             </iframe>
                         </div>
                         <div class="aspect-video">
-                            <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/Un7pNbTlst8?si=mQ3T5YMXwrRzbZ_P"
-                                frameborder="0" allow="autoplay; encrypted-media">
+                            <iframe class="w-full h-full rounded-lg"
+                                src="https://www.youtube.com/embed/Un7pNbTlst8?si=mQ3T5YMXwrRzbZ_P" frameborder="0"
+                                allow="autoplay; encrypted-media">
                             </iframe>
                         </div>
                     </div>
@@ -942,67 +1074,85 @@
                             <div class="testimonial-slide absolute inset-0 flex items-center justify-center">
                                 <div class="max-w-2xl mx-auto px-6 text-center">
                                     <div class="testimonial-content relative">
-                                        <span class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
-                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">Dan's performance left our
-                                            entire team speechless. The way he integrated our company values into his act was simply
+                                        <span
+                                            class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">Dan's
+                                            performance left our
+                                            entire team speechless. The way he integrated our company values into his
+                                            act was simply
                                             brilliant!</p>
-                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Simply brilliant!</p>
+                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Simply
+                                            brilliant!</p>
                                         <div class="testimonial-author">
                                             <p class="text-lg font-bold text-white">Sarah Johnson</p>
                                             <p class="text-sm text-gray-400">Google, Head of Events</p>
                                         </div>
-                                        <span class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <span
+                                            class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
                                     </div>
                                 </div>
                             </div>
-                    
+
                             <!-- Second testimonial -->
                             <div class="testimonial-slide absolute inset-0 flex items-center justify-center">
                                 <div class="max-w-2xl mx-auto px-6 text-center">
                                     <div class="testimonial-content relative">
-                                        <span class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
-                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">The virtual show exceeded
-                                            all expectations. Dan's ability to create genuine wonder through a screen is remarkable!</p>
-                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Absolutely remarkable!</p>
+                                        <span
+                                            class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">The
+                                            virtual show exceeded
+                                            all expectations. Dan's ability to create genuine wonder through a screen is
+                                            remarkable!</p>
+                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Absolutely
+                                            remarkable!</p>
                                         <div class="testimonial-author">
                                             <p class="text-lg font-bold text-white">Michael Chang</p>
                                             <p class="text-sm text-gray-400">Apple, Innovation Director</p>
                                         </div>
-                                        <span class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <span
+                                            class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
                                     </div>
                                 </div>
                             </div>
-                    
+
                             <!-- Third testimonial -->
                             <div class="testimonial-slide absolute inset-0 flex items-center justify-center">
                                 <div class="max-w-2xl mx-auto px-6 text-center">
                                     <div class="testimonial-content relative">
-                                        <span class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
-                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">Dan's iPhone magic segment
+                                        <span
+                                            class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">Dan's
+                                            iPhone magic segment
                                             was the highlight of our tech conference. Simply revolutionary!</p>
-                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Simply revolutionary!</p>
+                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Simply
+                                            revolutionary!</p>
                                         <div class="testimonial-author">
                                             <p class="text-lg font-bold text-white">Emily Rodriguez</p>
                                             <p class="text-sm text-gray-400">Tesla, Event Coordinator</p>
                                         </div>
-                                        <span class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <span
+                                            class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
                                     </div>
                                 </div>
                             </div>
-                    
+
                             <!-- Fourth testimonial -->
                             <div class="testimonial-slide absolute inset-0 flex items-center justify-center">
                                 <div class="max-w-2xl mx-auto px-6 text-center">
                                     <div class="testimonial-content relative">
-                                        <span class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
-                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">He was simply stunning on
+                                        <span
+                                            class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">He was
+                                            simply stunning on
                                             the stage mesmerizing us all in a matter of minutes!</p>
-                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Absolutely mesmerizing!</p>
+                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Absolutely
+                                            mesmerizing!</p>
                                         <div class="testimonial-author">
                                             <p class="text-lg font-bold text-white">George Thomas</p>
                                             <p class="text-sm text-gray-400">GMC, Executive Head</p>
                                         </div>
-                                        <span class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <span
+                                            class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
                                     </div>
                                 </div>
                             </div>
@@ -1011,19 +1161,23 @@
                             <div class="testimonial-slide absolute inset-0 flex items-center justify-center">
                                 <div class="max-w-2xl mx-auto px-6 text-center">
                                     <div class="testimonial-content relative">
-                                        <span class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
-                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">Never before have i been this excited to see what happens next</p>
-                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Just Amazing!</p>
+                                        <span
+                                            class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">Never
+                                            before have i been this excited to see what happens next</p>
+                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Just Amazing!
+                                        </p>
                                         <div class="testimonial-author">
                                             <p class="text-lg font-bold text-white">Linda Geofrey</p>
                                             <p class="text-sm text-gray-400">Amazon, Product Head</p>
                                         </div>
-                                        <span class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <span
+                                            class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    
+
                         <!-- Navigation dots -->
                         <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
                             <button
@@ -1034,7 +1188,8 @@
                                 class="w-3 h-3 rounded-full bg-yellow-600/50 hover:bg-yellow-600 transition-colors testimonial-dot"></button>
                             <button
                                 class="w-3 h-3 rounded-full bg-yellow-600/50 hover:bg-yellow-600 transition-colors testimonial-dot"></button>
-                            <button class="w-3 h-3 rounded-full bg-yellow-600/50 hover:bg-yellow-600 transition-colors testimonial-dot"></button>
+                            <button
+                                class="w-3 h-3 rounded-full bg-yellow-600/50 hover:bg-yellow-600 transition-colors testimonial-dot"></button>
                         </div>
 
                         <!-- Video background -->
@@ -1159,334 +1314,420 @@
 
 
     <script>
-        // First, add these helper functions at the start of your script section
-        function getOffsetTop(element) {
-            let offsetTop = 0;
-            while (element) {
-                offsetTop += element.offsetTop;
-                element = element.offsetParent;
-            }
-            return offsetTop;
-        }
+        // Function to check if the main hero background image is loaded
+            function checkImageLoaded() {
+                const heroBackground = document.querySelector('.hero-background');
 
-        // GSAP Animations
-        gsap.registerPlugin(ScrollTrigger);
+                function imageLoaded() {
+                    // Image is loaded, proceed with loader removal and animations
+                    initiatePageAnimations();
+                    removeLoader(); // Call removeLoader here
+                }
 
-        // Hero section animations
-        const heroAnimation = gsap.timeline({ defaults: { ease: "power3.out" } });
-        gsap.set('body', { opacity: 1 }); // Setting default opacity using GSAP
-        heroAnimation
-            .from(".hero-background", {
-                scale: 1.2,
-                duration: 2.5,
-            })
-            .to(".hero-title", {
-                opacity: 1,
-                y: 0,
-                duration: 1.5,
-            }, "-=2")
-            .to(".hero-subtitle", {
-                opacity: 1,
-                y: 0,
-                duration: 1.5,
-            }, "-=1");
-
-        // Parallax effect on scroll
-        gsap.to(".hero-background", {
-            scrollTrigger: {
-                trigger: ".hero-container",
-                start: "top top",
-                end: "bottom top",
-                scrub: 1
-            },
-            y: 200,
-            scale: 1.1
-        });
-
-        // Parallax Effect for sections with background images
-        gsap.utils.toArray('[data-parallax]').forEach(section => {
-            const bg = section.querySelector('.parallax-bg');
-
-            gsap.to(bg, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: true
-                },
-                y: '30%',
-                ease: 'none'
-            });
-        });
-
-        // Section titles animation
-        gsap.utils.toArray('.section-title').forEach(title => {
-            gsap.from(title, {
-                scrollTrigger: {
-                    trigger: title,
-                    start: "top 80%",
-                    toggleActions: "play none none reset",
-                    scrub: false
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                ease: "power2.out"
-            });
-        });
-
-        // Fixed animation for all content including iframes and cards
-        document.querySelectorAll('section').forEach(section => {
-            // Select all cards and iframes in the section
-            const cards = section.querySelectorAll('.card');
-            const iframes = section.querySelectorAll('.aspect-video iframe');
-            const forms = section.querySelectorAll('form');
-
-            // Animate cards
-            cards.forEach((card, index) => {
-                gsap.from(card, {
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 80%",
-                        toggleActions: "play none none reset"
-                    },
-                    opacity: 0,
-                    y: 50,
-                    x: -30,
-                    duration: 0.8,
-                    delay: index * 0.2,
-                    ease: "power2.out"
-                });
-            });
-
-            // Animate iframes
-            iframes.forEach((iframe, index) => {
-                gsap.from(iframe.parentElement, {
-                    scrollTrigger: {
-                        trigger: iframe.parentElement,
-                        start: "top 80%",
-                        toggleActions: "play none none reset"
-                    },
-                    opacity: 0,
-                    y: 50,
-                    x: 30,
-                    duration: 0.8,
-                    delay: index * 0.2,
-                    ease: "power2.out"
-                });
-            });
-
-
-            // Animate forms
-            forms.forEach((form) => {
-                gsap.from(form, {
-                    scrollTrigger: {
-                        trigger: form,
-                        start: "top 80%",
-                        toggleActions: "play none none reset"
-                    },
-                    opacity: 0,
-                    y: 50,
-                    duration: 0.8,
-                    ease: "power2.out"
-                });
-            });
-        });
-
-        // Enhanced card hover animations
-        gsap.utils.toArray('.card').forEach(card => {
-            const hoverTl = gsap.timeline({ paused: true });
-
-            hoverTl.to(card, {
-                y: -10,
-                scale: 1.02,
-                duration: 0.3,
-                boxShadow: "0 25px 50px rgba(184, 134, 11, 0.3)",
-                ease: "power2.out"
-            });
-
-            card.addEventListener('mouseenter', () => hoverTl.play());
-            card.addEventListener('mouseleave', () => hoverTl.reverse());
-        });
-
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuClose = document.getElementById('mobile-menu-close');
-            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-
-            // Function to open menu
-            function openMenu() {
-                mobileMenu.style.display = 'flex';
-                setTimeout(() => {
-                    mobileMenu.classList.add('active');
-                }, 10);
-            }
-
-            // Function to close menu
-            function closeMenu() {
-                mobileMenu.classList.remove('active');
-                setTimeout(() => {
-                    mobileMenu.style.display = 'none';
-                }, 300); // Match this with the CSS transition time
-            }
-
-            // Toggle menu on burger click
-            mobileMenuButton.addEventListener('click', function (e) {
-                e.stopPropagation();
-                if (mobileMenu.classList.contains('active')) {
-                    closeMenu();
+                // If the image is already loaded
+                if (heroBackground.complete) {
+                    imageLoaded();
                 } else {
-                    openMenu();
+                    // Add load event listener
+                    heroBackground.addEventListener('load', imageLoaded);
+                    // Add error event listener to handle a failed load
+                    heroBackground.addEventListener('error', imageLoaded);
                 }
-            });
-
-            // Close menu when clicking the close button
-            mobileMenuClose.addEventListener('click', closeMenu);
-
-            // Close menu when clicking a link
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function (e) {
-                if (mobileMenu.classList.contains('active') &&
-                    !mobileMenu.contains(e.target) &&
-                    e.target !== mobileMenuButton) {
-                    closeMenu();
-                }
-            });
-        });
-
-        // Smooth scroll functionality
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const target = document.querySelector(targetId);
-
-                if (target) {
-                    const headerHeight = document.querySelector('nav').offsetHeight;
-                    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
-
-                    window.scrollTo({
-                        top: targetPosition - headerHeight,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for nav links highlight
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        const observerOptions = {
-            rootMargin: '-50% 0px',
-            threshold: 0
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(link => {
-                        if (link.getAttribute('href') === `#${entry.target.id}`) {
-                            link.classList.add('text-yellow-600');
-                        } else {
-                            link.classList.remove('text-yellow-600');
-                        }
-                    });
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => observer.observe(section));
-
-        // Video lazy loading
-        document.addEventListener('DOMContentLoaded', function () {
-            const videos = document.querySelectorAll('iframe[src*="youtube.com"]');
-            const videoObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const video = entry.target;
-                        if (!video.src.includes('autoplay')) {
-                            video.src = video.src.replace('youtube.com', 'youtube-nocookie.com');
-                        }
-                        videoObserver.unobserve(video);
-                    }
-                });
-            }, {
-                rootMargin: '50px'
-            });
-
-            videos.forEach(video => videoObserver.observe(video));
-        });
-
-        // Form validation and submission
-        const form = document.querySelector('form');
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const name = form.querySelector('input[type="text"]').value;
-            const email = form.querySelector('input[type="email"]').value;
-            const message = form.querySelector('textarea').value;
-
-            if (!name || !email || !message) {
-                alert('Please fill in all fields');
-                return;
             }
 
-            if (!isValidEmail(email)) {
-                alert('Please enter a valid email address');
-                return;
-            }
+            // Function to initialize page animations after loader is lifted
+            function initiatePageAnimations() {
+                // GSAP Animations
+                gsap.registerPlugin(ScrollTrigger);
 
-            // Here you would typically send the form data to your server
-            console.log('Form submitted:', { name, email, message });
-            alert('Thank you for your message. We will get back to you soon!');
-            form.reset();
-        });
-
-        function isValidEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
-
-        // Handle ScrollTrigger refresh on resize
-        ScrollTrigger.addEventListener("refreshInit", () => gsap.set(".section", { clearProps: "all" }));
-        window.addEventListener("resize", () => {
-            ScrollTrigger.refresh();
-        });
-
-        // Add this after the existing GSAP animations
-        gsap.utils.toArray('.video-testimonial').forEach(testimonial => {
-            gsap.set(testimonial, { opacity: 0, y: 20 });
-
-            ScrollTrigger.create({
-                trigger: testimonial,
-                start: "top 80%",
-                onEnter: () => {
-                    gsap.to(testimonial, {
-                        opacity: 0.7,
+                // Hero section animations
+                const heroAnimation = gsap.timeline({ defaults: { ease: "power3.out" } });
+                gsap.set('body', { opacity: 1 });
+                heroAnimation
+                    .from(".hero-background", {
+                        scale: 1.2,
+                        duration: 2.5,
+                    })
+                    .to(".hero-title", {
+                        opacity: 1,
                         y: 0,
-                        duration: 0.8,
+                        duration: 1.5,
+                    }, "-=2")
+                    .to(".hero-subtitle", {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1.5,
+                    }, "-=1");
+
+                // Parallax effect on scroll
+                gsap.to(".hero-background", {
+                    scrollTrigger: {
+                        trigger: ".hero-container",
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: 1
+                    },
+                    y: 200,
+                    scale: 1.1
+                });
+
+                // Parallax Effect for sections with background images
+                gsap.utils.toArray('[data-parallax]').forEach(section => {
+                    const bg = section.querySelector('.parallax-bg');
+
+                    gsap.to(bg, {
+                        scrollTrigger: {
+                            trigger: section,
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: true
+                        },
+                        y: '30%',
+                        ease: 'none'
+                    });
+                });
+
+                // Section titles animation
+                gsap.utils.toArray('.section-title').forEach(title => {
+                    gsap.from(title, {
+                        scrollTrigger: {
+                            trigger: title,
+                            start: "top 80%",
+                            toggleActions: "play none none reset",
+                            scrub: false
+                        },
+                        y: 50,
+                        opacity: 0,
+                        duration: 1,
                         ease: "power2.out"
                     });
-                },
-                onLeaveBack: () => {
-                    gsap.to(testimonial, {
-                        opacity: 0,
-                        y: 20,
-                        duration: 0.8,
-                        ease: "power2.in"
+                });
+
+                // Fixed animation for all content including iframes and cards
+                document.querySelectorAll('section').forEach(section => {
+                    // Select all cards and iframes in the section
+                    const cards = section.querySelectorAll('.card');
+                    const iframes = section.querySelectorAll('.aspect-video iframe');
+                    const forms = section.querySelectorAll('form');
+
+                    // Animate cards
+                    cards.forEach((card, index) => {
+                        gsap.from(card, {
+                            scrollTrigger: {
+                                trigger: card,
+                                start: "top 80%",
+                                toggleActions: "play none none reset"
+                            },
+                            opacity: 0,
+                            y: 50,
+                            x: -30,
+                            duration: 0.8,
+                            delay: index * 0.2,
+                            ease: "power2.out"
+                        });
                     });
-                }
+
+                    // Animate iframes
+                    iframes.forEach((iframe, index) => {
+                        gsap.from(iframe.parentElement, {
+                            scrollTrigger: {
+                                trigger: iframe.parentElement,
+                                start: "top 80%",
+                                toggleActions: "play none none reset"
+                            },
+                            opacity: 0,
+                            y: 50,
+                            x: 30,
+                            duration: 0.8,
+                            delay: index * 0.2,
+                            ease: "power2.out"
+                        });
+                    });
+
+                    // Animate forms
+                    forms.forEach((form) => {
+                        gsap.from(form, {
+                            scrollTrigger: {
+                                trigger: form,
+                                start: "top 80%",
+                                toggleActions: "play none none reset"
+                            },
+                            opacity: 0,
+                            y: 50,
+                            duration: 0.8,
+                            ease: "power2.out"
+                        });
+                    });
+                });
+
+                // Enhanced card hover animations
+                gsap.utils.toArray('.card').forEach(card => {
+                    const hoverTl = gsap.timeline({ paused: true });
+
+                    hoverTl.to(card, {
+                        y: -10,
+                        scale: 1.02,
+                        duration: 0.3,
+                        boxShadow: "0 25px 50px rgba(184, 134, 11, 0.3)",
+                        ease: "power2.out"
+                    });
+
+                    card.addEventListener('mouseenter', () => hoverTl.play());
+                    card.addEventListener('mouseleave', () => hoverTl.reverse());
+                });
+
+                // Make hero section visible after loader is removed
+                const heroSection = document.querySelector('.hero-container');
+                heroSection.style.visibility = 'visible';
+
+                // Add animation for social links
+                const socialLinks = document.querySelectorAll('.social-link');
+                socialLinks.forEach(link => {
+                    link.addEventListener('mouseenter', () => {
+                        link.querySelector('svg').classList.add('text-yellow-400');
+                    });
+
+                    link.addEventListener('mouseleave', () => {
+                        link.querySelector('svg').classList.remove('text-yellow-400');
+                    });
+                });
+
+                gsap.utils.toArray('.video-testimonial').forEach(testimonial => {
+                    gsap.set(testimonial, { opacity: 0, y: 20 });
+
+                    ScrollTrigger.create({
+                        trigger: testimonial,
+                        start: "top 80%",
+                        onEnter: () => {
+                            gsap.to(testimonial, {
+                                opacity: 0.7,
+                                y: 0,
+                                duration: 0.8,
+                                ease: "power2.out"
+                            });
+                        },
+                        onLeaveBack: () => {
+                            gsap.to(testimonial, {
+                                opacity: 0,
+                                y: 20,
+                                duration: 0.8,
+                                ease: "power2.in"
+                            });
+                        }
+                    });
+                });
+            }
+
+            // Function to handle the loader removal with slide-up animation
+            function removeLoader() {
+                const loader = document.querySelector('.loader-curtain');
+                loader.classList.add('slide-up');
+
+                // Remove loader from DOM after animation
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 1600); // 800ms matches the loader's slide-up duration
+            }
+
+            // Start checking for image load as soon as the DOM is ready
+            document.addEventListener('DOMContentLoaded', () => {
+                checkImageLoaded();
             });
-        });
-    </script>
-    <script>
-        const testimonials = document.querySelectorAll('.testimonial-slide');
+
+            // Backup loading timeout - ensure loader disappears even if something goes wrong
+            setTimeout(() => {
+                const loader = document.querySelector('.loader-container');
+                const heroSection = document.querySelector('.hero-container');
+
+                if (loader && loader.classList.contains('slide-up') == false) {
+                    loader.classList.add('slide-up');
+                    heroSection.style.visibility = 'visible';
+
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 800);
+                }
+                initiatePageAnimations();
+            }, ); // 5 second maximum loading time
+
+            // Start checking for image load as soon as the DOM is ready
+            document.addEventListener('DOMContentLoaded', function () {
+                checkImageLoaded();
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const mobileMenuClose = document.getElementById('mobile-menu-close');
+                const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+                // Function to open menu
+                function openMenu() {
+                    mobileMenu.style.display = 'flex';
+                    setTimeout(() => {
+                        mobileMenu.classList.add('active');
+                    }, 10);
+                }
+
+                // Function to close menu
+                function closeMenu() {
+                    mobileMenu.classList.remove('active');
+                    setTimeout(() => {
+                        mobileMenu.style.display = 'none';
+                    }, 300); // Match this with the CSS transition time
+                }
+
+                // Toggle menu on burger click
+                mobileMenuButton.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    if (mobileMenu.classList.contains('active')) {
+                        closeMenu();
+                    } else {
+                        openMenu();
+                    }
+                });
+
+                // Close menu when clicking the close button
+                mobileMenuClose.addEventListener('click', closeMenu);
+
+                // Close menu when clicking a link
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function (e) {
+                    if (mobileMenu.classList.contains('active') &&
+                        !mobileMenu.contains(e.target) &&
+                        e.target !== mobileMenuButton) {
+                        closeMenu();
+                    }
+                });
+            });
+
+            // Smooth scroll functionality
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
+
+                    if (target) {
+                        const headerHeight = document.querySelector('nav').offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+
+                        window.scrollTo({
+                            top: targetPosition - headerHeight,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Intersection Observer for nav links highlight
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                rootMargin: '-50% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${entry.target.id}`) {
+                                link.classList.add('text-yellow-600');
+                            } else {
+                                link.classList.remove('text-yellow-600');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+            // Video lazy loading
+            document.addEventListener('DOMContentLoaded', function () {
+                const videos = document.querySelectorAll('iframe[src*="youtube.com"]');
+                const videoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const video = entry.target;
+                            if (!video.src.includes('autoplay')) {
+                                video.src = video.src.replace('youtube.com', 'youtube-nocookie.com');
+                            }
+                            videoObserver.unobserve(video);
+                        }
+                    });
+                }, {
+                    rootMargin: '50px'
+                });
+
+                videos.forEach(video => videoObserver.observe(video));
+            });
+
+            // Form validation and submission
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const name = form.querySelector('input[type="text"]').value;
+                const email = form.querySelector('input[type="email"]').value;
+                const message = form.querySelector('textarea').value;
+
+                if (!name || !email || !message) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+
+                if (!isValidEmail(email)) {
+                    alert('Please enter a valid email address');
+                    return;
+                }
+
+                // Here you would typically send the form data to your server
+                console.log('Form submitted:', { name, email, message });
+                alert('Thank you for your message. We will get back to you soon!');
+                form.reset();
+            });
+
+            function isValidEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            // Handle ScrollTrigger refresh on resize
+            ScrollTrigger.addEventListener("refreshInit", () => gsap.set(".section", { clearProps: "all" }));
+            window.addEventListener("resize", () => {
+                ScrollTrigger.refresh();
+            });
+
+            // Add this after the existing GSAP animations
+            gsap.utils.toArray('.video-testimonial').forEach(testimonial => {
+                gsap.set(testimonial, { opacity: 0, y: 20 });
+
+                ScrollTrigger.create({
+                    trigger: testimonial,
+                    start: "top 80%",
+                    onEnter: () => {
+                        gsap.to(testimonial, {
+                            opacity: 0.7,
+                            y: 0,
+                            duration: 0.8,
+                            ease: "power2.out"
+                        });
+                    },
+                    onLeaveBack: () => {
+                        gsap.to(testimonial, {
+                            opacity: 0,
+                            y: 20,
+                            duration: 0.8,
+                            ease: "power2.in"
+                        });
+                    }
+                });
+            });
+
+            const testimonials = document.querySelectorAll('.testimonial-slide');
             const dots = document.querySelectorAll('.testimonial-dot');
             let currentTestimonial = 0;
             let rotationInterval;
@@ -1565,29 +1806,29 @@
             // Start observing the testimonial container
             const testimonialContainer = document.querySelector('.testimonial-container');
             observer1.observe(testimonialContainer);
+
+            const videoContainer = document.getElementById('video-container'); // Correct ID
+            const youtubeVideo = document.getElementById('youtube-video');   // Correct ID
+            let isPlaying = false;
+
+            const observer2 = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !isPlaying) {
+                        // Add autoplay when in viewport and not already playing
+                        youtubeVideo.src += "&autoplay=1";
+                        isPlaying = true;
+                        youtubeVideo.style.pointerEvents = "auto";
+                    } else if (!entry.isIntersecting && isPlaying) {
+                        // Pause the video (logic explained below)
+                        isPlaying = false;
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer2.observe(videoContainer);
     </script>
-    <script>
-        const videoContainer = document.getElementById('video-container'); // Correct ID
-        const youtubeVideo = document.getElementById('youtube-video');   // Correct ID
-        let isPlaying = false;
-
-        const observer2 = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !isPlaying) {
-                    // Add autoplay when in viewport and not already playing
-                    youtubeVideo.src += "&autoplay=1";
-                    isPlaying = true;
-                    youtubeVideo.style.pointerEvents = "auto";
-                } else if (!entry.isIntersecting && isPlaying) {
-                    // Pause the video (logic explained below)
-                    isPlaying = false;
-                }
-            });
-        }, { threshold: 0.5 });
-
-        observer2.observe(videoContainer);
-    </script>
-
+    
+   
 </body>
 
 </html>
