@@ -1548,7 +1548,7 @@
                     }, 800);
                 }
                 initiatePageAnimations();
-            }, ); // 5 second maximum loading time
+            }, 5000); // 5 second maximum loading time
 
             // Start checking for image load as soon as the DOM is ready
             document.addEventListener('DOMContentLoaded', function () {
