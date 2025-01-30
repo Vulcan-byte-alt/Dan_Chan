@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Dan Chan - Professional Mentalist & Digital Illusionist specializing in mind reading, psychological illusions, and iPhone magic. Based in San Francisco Bay Area.">
+    <meta name="keywords"
+        content="Dan Chan, mentalist, mind reader, psychological illusions, iPhone magic, virtual mentalist, San Francisco mentalist, corporate entertainment">
+    <title>Dan Chan | Professional Mentalist & Digital Illusionist</title>
+    <link rel="preload" href="Kirk-Marsh-Chair-04_Large.png" as="image">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Raleway:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #B8860B;
+            --text-color: #ffffff;
+            --bg-color: #000000;
+            --accent-color: #a0aec0;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Raleway', sans-serif;
+            overflow-x: hidden;
+            opacity: 1;
+            /* Setting default opacity for no flicker */
+        }
+
+        /* Navigation styles */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-family: 'Cormorant', serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 101;
+            padding-top: 6rem;
+            transition: right 0.3s ease-in-out;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 2rem;
+        }
+
+        .mobile-menu-button {
+            display: none;
+            cursor: pointer;
+            z-index: 102;
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+        }
+
+        /* Add styles for the close button */
+        .mobile-menu-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Styles */
+        .hero-container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Kirk-Marsh-Chair-04_Large.png');
+            background-size: cover;
+            background-position: center 5%;
+            filter: brightness(0.7);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(3rem, 10vw, 10rem);
+            font-weight: 700;
+            line-height: 1;
+            margin: 0;
+            opacity: 0;
+            /* Set to zero initially for animation */
+            transform: translateY(50px);
+            /* Set initial position for animation */
+            letter-spacing: 0.01em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            margin-top: 2rem;
+            opacity: 0;
+            /* Set to zero initially for animation */
+            transform: translateY(30px);
+            /* Set initial position for animation */
+        }
+
+
+        .overlay-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
+            z-index: 1;
+        }
+
+        /* Parallax effect on scroll */
+        .parallax-section {
+            position: relative;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+
+        /* Card styles */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 20px 40px rgba(184, 134, 11, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+
+        .card:hover {
+            transform: translateX(-10px);
+            box-shadow: 0 25px 50px rgba(184, 134, 11, 0.3);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--accent-color);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+
+        /* Section title */
+        .section-title {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            background: linear-gradient(45deg, #B8860B, #736e6e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+
+        /* Section styles */
+        section {
+            padding: 8rem 0;
+        }
+
+
+        section:nth-child(even) {
+            background: #0a0a0a;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+        }
+
+
+        .mystical-bg {
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .mystical-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(184, 134, 11, 0.15), transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .brain-waves {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background:
+                repeating-linear-gradient(45deg,
+                    transparent 0,
+                    transparent 2px,
+                    #B8860B 2px,
+                    #B8860B 4px);
+            animation: waveMove 20s linear infinite;
+            transform-origin: center;
+        }
+
+        .floating-symbols {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .symbol {
+            position: absolute;
+            color: #B8860B;
+            opacity: 0;
+            font-size: 24px;
+            animation: floatSymbol 8s linear infinite;
+        }
+
+        .thought-bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .bubble {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(184, 134, 11, 0.1), transparent);
+            border-radius: 50%;
+            animation: bubbleFloat 10s ease-in-out infinite;
+        }
+
+        .geometric-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(30deg, #B8860B 12%, transparent 12.5%, transparent 87%, #B8860B 87.5%, #B8860B),
+                linear-gradient(150deg, #B8860B 12%, transparent 12.5%, transparent 87%, #B8860B 87.5%, #B8860B),
+                linear-gradient(30deg, #B8860B 12%, transparent 12.5%, transparent 87%, #B8860B 87.5%, #B8860B),
+                linear-gradient(150deg, #B8860B 12%, transparent 12.5%, transparent 87%, #B8860B 87.5%, #B8860B),
+                linear-gradient(60deg, #B8860B77 25%, transparent 25.5%, transparent 75%, #B8860B77 75%, #B8860B77);
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0;
+            opacity: 0.03;
+            animation: patternMove 10s linear infinite;
+        }
+
+        @keyframes waveMove {
+            0% {
+                transform: translateX(-10px) translateY(-10px);
+            }
+
+            50% {
+                transform: translateX(10px) translateY(10px);
+            }
+
+            100% {
+                transform: translateX(-10px) translateY(-10px);
+            }
+        }
+
+        @keyframes floatSymbol {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.3;
+            }
+
+            90% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bubbleFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: translateY(-20px) translateX(10px) scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes patternMove {
+            0% {
+                background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0;
+            }
+
+            100% {
+                background-position: 80px 140px, 80px 140px, 120px 210px, 120px 210px, 80px 140px;
+            }
+        }
+
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+            transform: translateZ(0);
+        }
+
+        .section-transition {
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, #000);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(100px);
+        }
+
+        .section-glow {
+            position: relative;
+        }
+
+        .section-glow::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(184, 134, 11, 0),
+                    rgba(184, 134, 11, 0.6),
+                    rgba(184, 134, 11, 0.8),
+                    rgba(184, 134, 11, 0.6),
+                    rgba(184, 134, 11, 0),
+                    transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        @keyframes glowAnimation {
+            0% {
+                transform: scaleX(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scaleX(1);
+                opacity: 1;
+            }
+        }
+
+        .hero-parallax {
+            transition: transform 0.1s ease-out;
+        }
+
+        .section-transition {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-transition::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 0.8) 100%);
+            pointer-events: none;
+        }
+
+        .testimonial-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-slide {
+            position: absolute;
+            width: 100%;
+            transform: translateX(100%);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+
+        .testimonial-slide.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .testimonial-slide.previous {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        .testimonial-dot.active {
+            background-color: rgb(202 138 4);
+        }
+
+
+        .video-testimonial {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.85);
+        }
+
+        .video-testimonial p {
+            font-size: 1.75rem;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-family: 'Cormorant', serif;
+            padding: 2rem;
+            border-radius: 8px;
+            transform: scale(0.9);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            max-width: 80%;
+            line-height: 1.6;
+        }
+
+        .video-testimonial p::before,
+        .video-testimonial p::after {
+            content: '"';
+            position: absolute;
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.3;
+        }
+
+        .video-testimonial p::before {
+            left: -1rem;
+            top: -1rem;
+        }
+
+        .video-testimonial p::after {
+            right: -1rem;
+            bottom: -2rem;
+        }
+
+        .aspect-video:hover .video-testimonial {
+            opacity: 1;
+            transform: translateY(0);
+            background: rgba(0, 0, 0, 0.85);
+        }
+
+        .aspect-video:hover .video-testimonial p {
+            transform: scale(1);
+        }
+
+        /* Add animation for social links */
+        .social-links {
+            animation: fadeInRight 1s ease-out 1s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px) translateY(-50%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0) translateY(-50%);
+            }
+        }
+
+        .social-link {
+            position: relative;
+        }
+
+        .social-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .video-grayscale iframe {
+            filter: grayscale(100%);
+        }
+
+        /* Carousel Styles */
+        .client-carousel-container {
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 20px 0;
+        }
+
+        .client-carousel {
+            display: flex;
+            animation: carouselSlide 30s linear infinite;
+            width: fit-content;
+        }
+
+        .client-carousel img {
+            height: 80px;
+            margin-right: 40px;
+        }
+
+        @keyframes carouselSlide {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        #contact .aspect-video {
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        #contact .aspect-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            /* Remove any default iframe borders */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">DAN CHAN</a>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">ABOUT</a>
+                <a href="#iphone-magic" class="nav-link">iPHONE MAGIC</a>
+                <a href="#virtual" class="nav-link">VIRTUAL SHOWS</a>
+                <a href="#media" class="nav-link">MEDIA</a>
+                <a href="#contact" class="nav-link">CONTACT</a>
+            </div>
+            <button class="mobile-menu-button" id="mobile-menu-button">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Update the mobile menu HTML structure: -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-close" id="mobile-menu-close">×</div>
+        <a href="#about">ABOUT</a>
+        <a href="#iphone-magic">iPHONE MAGIC</a>
+        <a href="#virtual">VIRTUAL SHOWS</a>
+        <a href="#media">MEDIA</a>
+        <a href="#contact">CONTACT</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-container">
+        <div class="hero-background"></div>
+        <div class="overlay-gradient"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">DAN CHAN</h1>
+            <h2 class="hero-subtitle">MENTALIST & DIGITAL ILLUSIONIST</h2>
+            <!-- Add this right after the hero-subtitle in the hero-content div -->
+            <div class="social-links absolute right-8 top-1/2 transform -translate-y-1/2 flex flex-col gap-6 z-50">
+                <a href="#" class="social-link hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6 fill-current text-yellow-600 hover:text-yellow-400" viewBox="0 0 24 24">
+                        <path
+                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
+                </a>
+                <a href="#" class="social-link hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6 fill-current text-yellow-600 hover:text-yellow-400" viewBox="0 0 24 24">
+                        <path
+                            d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                    </svg>
+                </a>
+                <a href="#" class="social-link hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6 fill-current text-yellow-600 hover:text-yellow-400" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
+                    </svg>
+                </a>
+                <a href="#" class="social-link hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6 fill-current text-yellow-600 hover:text-yellow-400" viewBox="0 0 24 24">
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add this HTML structure where you want the animated background -->
+    <div class="mystical-bg">
+        <div class="mystical-overlay"></div>
+        <div class="brain-waves"></div>
+        <div class="geometric-pattern"></div>
+
+
+        <!-- Your content goes here -->
+        <div class="parallax-content">
+
+
+            <!-- Featured Video Section -->
+            <section id="video" class="py-20 bg-black">
+                <div class="container">
+                    <div class="aspect-video">
+                        <iframe class="w-full h-full"
+                            src="https://www.youtube.com/embed/JaO7S65OqE8?autoplay=1&mute=1&controls=0&loop=1&playlist=JaO7S65OqE8" frameborder="0"
+                            allow="autoplay; encrypted-media" style="box-shadow: 0 40px 40px rgba(184, 134, 11, 0.2);">
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" data-parallax="true">
+                <div class="container relative z-10">
+                    <h2 class="section-title">ABOUT</h2>
+                    <div class="grid-container">
+                        <div class="card">
+                            <h3>Professional Mentalist</h3>
+                            <p>Dan Chan is a professional mentalist and digital illusionist who specializes in
+                                mind-reading,
+                                psychological illusions, and cutting-edge iPhone magic.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Unique Entertainment</h3>
+                            <p>With years of experience, Dan provides captivating entertainment experiences for
+                                corporate
+                                events,
+                                private parties, and virtual shows. He uses his skills to blend tech and magic in his
+                                presentations
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h3>Based in San Francisco</h3>
+                            <p>Dan is based in the San Francisco Bay Area but is available for events worldwide, both
+                                in-person
+                                and virtual. His shows can be customized to suit any event or audience.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Media Section -->
+            <section id="media" data-parallax="true">
+                <div class="container relative z-10">
+                    <h2 class="section-title">MEDIA FEATURES</h2>
+                    <div class="grid-container">
+                        <div class="card">
+                            <h3 class="text-2xl font-bold mb-6 text-cyan-400">AS SEEN ON</h3>
+                            <ul class="space-y-4 text-gray-300">
+                                <li>ABC 7 News</li>
+                                <li>NBC Bay Area</li>
+                                <li>Your California Life</li>
+                                <li>Live in the Bay</li>
+                            </ul>
+                        </div>
+                        <div class="aspect-video">
+                            <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/ePLD-gqHpRM"
+                                frameborder="0" allow="autoplay; encrypted-media">
+                            </iframe>
+                        </div>
+                        <div class="aspect-video">
+                            <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/Un7pNbTlst8?si=mQ3T5YMXwrRzbZ_P"
+                                frameborder="0" allow="autoplay; encrypted-media">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+            <!-- iPhone Magic Section -->
+            <section id="iphone-magic" data-parallax="true">
+                <div class="container relative z-10">
+                    <h2 class="section-title">iPHONE MAGIC</h2>
+                    <div class="grid-container">
+                        <div class="card">
+                            <h3 class="text-2xl font-bold mb-4 text-cyan-400">Digital Mind Reading</h3>
+                            <p class="text-gray-300">Experience mind-reading through your iPhone screen. Using
+                                cutting-edge
+                                technology and psychological principles, Dan creates an unforgettable interactive
+                                experience.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h3 class="text-2xl font-bold mb-4 text-cyan-400">Interactive Magic</h3>
+                            <p class="text-gray-300">Your iPhone becomes a magical device in this unique blend of
+                                technology
+                                and mentalism. Perfect for corporate events and tech-savvy audiences.</p>
+                        </div>
+                        <div class="aspect-video">
+                            <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/HuqIwkb9_VA"
+                                frameborder="0" allow="autoplay; encrypted-media">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Virtual Shows Section -->
+            <section id="virtual" data-parallax="true">
+                <div class="container relative z-10">
+                    <h2 class="section-title">VIRTUAL SHOWS</h2>
+                    <div class="grid-container">
+                        <div class="aspect-video">
+                            <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/mJZKMuHEUxQ"
+                                frameborder="0" allow="autoplay; encrypted-media">
+                            </iframe>
+                        </div>
+                        <div class="card">
+                            <h3 class="text-2xl font-bold mb-4 text-cyan-400">Remote Mind Reading</h3>
+                            <p class="text-gray-300">Distance is no barrier to the impossible. Experience mind-reading
+                                and
+                                psychological illusions through your screen.</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="text-2xl font-bold mb-4 text-cyan-400">Interactive Virtual Events</h3>
+                            <p class="text-gray-300">Perfect for remote teams and virtual gatherings. Each show is
+                                customized to create an engaging and interactive experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- New "Our Clients" Section -->
+            <section id="clients" class="py-20 bg-black relative">
+                <div class="container">
+                    <h2 class="section-title">OUR CLIENTS INCLUDE</h2>
+                    <div class="client-carousel-container">
+                        <div class="client-carousel">
+                            <img src="google.png" alt="Google Logo">
+                            <img src="amazon.png" alt="Amazon Logo">
+                            <img src="apple.png" alt="Apple Logo">
+                            <img src="tesla.png" alt="Tesla Logo">
+                            <img src="meta.png" alt="Meta Logo">
+                            <img src="gmc.png" alt="gmc Logo">
+                            <img src="xerox.png" alt="Xerox Logo">
+                            <img src="google.png" alt="Google Logo">
+                            <img src="amazon.png" alt="Amazon Logo">
+                            <img src="apple.png" alt="Apple Logo">
+                            <img src="tesla.png" alt="Tesla Logo">
+                            <img src="meta.png" alt="Meta Logo">
+                            <img src="gmc.png" alt="gmc Logo">
+                            <img src="xerox.png" alt="Xerox Logo">
+                        </div>
+                    </div>
+                    <div class="aspect-video relative overflow-hidden">
+                        <div class="testimonial-container absolute inset-0 z-10 bg-black/75">
+                            <!-- First testimonial -->
+                            <div class="testimonial-slide absolute inset-0 flex items-center justify-center">
+                                <div class="max-w-2xl mx-auto px-6 text-center">
+                                    <div class="testimonial-content relative">
+                                        <span class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">Dan's performance left our
+                                            entire team speechless. The way he integrated our company values into his act was simply
+                                            brilliant!</p>
+                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Simply brilliant!</p>
+                                        <div class="testimonial-author">
+                                            <p class="text-lg font-bold text-white">Sarah Johnson</p>
+                                            <p class="text-sm text-gray-400">Google, Head of Events</p>
+                                        </div>
+                                        <span class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <!-- Second testimonial -->
+                            <div class="testimonial-slide absolute inset-0 flex items-center justify-center">
+                                <div class="max-w-2xl mx-auto px-6 text-center">
+                                    <div class="testimonial-content relative">
+                                        <span class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">The virtual show exceeded
+                                            all expectations. Dan's ability to create genuine wonder through a screen is remarkable!</p>
+                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Absolutely remarkable!</p>
+                                        <div class="testimonial-author">
+                                            <p class="text-lg font-bold text-white">Michael Chang</p>
+                                            <p class="text-sm text-gray-400">Apple, Innovation Director</p>
+                                        </div>
+                                        <span class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <!-- Third testimonial -->
+                            <div class="testimonial-slide absolute inset-0 flex items-center justify-center">
+                                <div class="max-w-2xl mx-auto px-6 text-center">
+                                    <div class="testimonial-content relative">
+                                        <span class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">Dan's iPhone magic segment
+                                            was the highlight of our tech conference. Simply revolutionary!</p>
+                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Simply revolutionary!</p>
+                                        <div class="testimonial-author">
+                                            <p class="text-lg font-bold text-white">Emily Rodriguez</p>
+                                            <p class="text-sm text-gray-400">Tesla, Event Coordinator</p>
+                                        </div>
+                                        <span class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <!-- Fourth testimonial -->
+                            <div class="testimonial-slide absolute inset-0 flex items-center justify-center">
+                                <div class="max-w-2xl mx-auto px-6 text-center">
+                                    <div class="testimonial-content relative">
+                                        <span class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">He was simply stunning on
+                                            the stage mesmerizing us all in a matter of minutes!</p>
+                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Absolutely mesmerizing!</p>
+                                        <div class="testimonial-author">
+                                            <p class="text-lg font-bold text-white">George Thomas</p>
+                                            <p class="text-sm text-gray-400">GMC, Executive Head</p>
+                                        </div>
+                                        <span class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fifth testimonial -->
+                            <div class="testimonial-slide absolute inset-0 flex items-center justify-center">
+                                <div class="max-w-2xl mx-auto px-6 text-center">
+                                    <div class="testimonial-content relative">
+                                        <span class="absolute -top-8 -left-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                        <p class="hidden md:block text-2xl font-cormorant text-yellow-600 mb-4">Never before have i been this excited to see what happens next</p>
+                                        <p class="md:hidden text-xl font-cormorant text-yellow-600 mb-4">Just Amazing!</p>
+                                        <div class="testimonial-author">
+                                            <p class="text-lg font-bold text-white">Linda Geofrey</p>
+                                            <p class="text-sm text-gray-400">Amazon, Product Head</p>
+                                        </div>
+                                        <span class="absolute -bottom-8 -right-8 text-6xl text-yellow-600 opacity-30">"</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Navigation dots -->
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
+                            <button
+                                class="w-3 h-3 rounded-full bg-yellow-600/50 hover:bg-yellow-600 transition-colors testimonial-dot active"></button>
+                            <button
+                                class="w-3 h-3 rounded-full bg-yellow-600/50 hover:bg-yellow-600 transition-colors testimonial-dot"></button>
+                            <button
+                                class="w-3 h-3 rounded-full bg-yellow-600/50 hover:bg-yellow-600 transition-colors testimonial-dot"></button>
+                            <button
+                                class="w-3 h-3 rounded-full bg-yellow-600/50 hover:bg-yellow-600 transition-colors testimonial-dot"></button>
+                            <button class="w-3 h-3 rounded-full bg-yellow-600/50 hover:bg-yellow-600 transition-colors testimonial-dot"></button>
+                        </div>
+
+                        <!-- Video background -->
+                        <iframe class="w-full h-full absolute inset-0 bg-black/85"
+                            src="https://www.youtube.com/embed/s9q4osZvZTQ?autoplay=1&mute=1&controls=0&loop=1&playlist=s9q4osZvZTQ"
+                            frameborder="0" allow="autoplay; encrypted-media">
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" data-parallax="true">
+                <div class="container relative z-10">
+                    <h2 class="section-title">GET IN TOUCH</h2>
+                    <div class="grid-container">
+                        <form class="space-y-8">
+                            <div class="space-y-6">
+                                <input type="text" placeholder="NAME"
+                                    class="w-full bg-gray-900/80 p-6 text-white border-b-2 border-yellow-500 focus:outline-none focus:border-yellow-400 transition-colors rounded-lg">
+                                <input type="email" placeholder="EMAIL"
+                                    class="w-full bg-gray-900/80 p-6 text-white border-b-2 border-yellow-500 focus:outline-none focus:border-yellow-400 transition-colors rounded-lg">
+                                <textarea placeholder="YOUR MESSAGE"
+                                    class="w-full bg-gray-900/80 p-6 text-white border-b-2 border-yellow-500 focus:outline-none focus:border-yellow-400 transition-colors rounded-lg h-48"></textarea>
+                            </div>
+                            <button
+                                class="w-full bg-yellow-600 p-6 text-black font-bold hover:bg-yellow-800 transition-colors rounded-lg">
+                                SEND MESSAGE
+                            </button>
+                        </form>
+                        <!-- Video section -->
+                        <div class="aspect-video" id="video-container">
+                            <!-- Keep your original aspect-video class AND add id="video-container" -->
+                            <iframe id="youtube-video" width="560" height="400"
+                                src="https://www.youtube.com/embed/MRtP37iECCk?mute=1&controls=0&loop=1&playlist=MRtP37iECCk"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black/80 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="relative w-full max-w-xs mb-5">
+                        <a href="#" class="nav-logo">DAN CHAN</a>
+                    </div>
+                    <p class="text-gray-400">Mentalist and Digital Illusionalist</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#about"
+                                class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">About</a>
+                        </li>
+                        <li><a href="#media"
+                                class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Media</a>
+                        </li>
+                        <li><a href="#contact"
+                                class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Contact</a>
+                        </li>
+                        <li><a href="#iphone-magic"
+                                class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">IPhone
+                                Magic</a></li>
+                        <li><a href="#virtual"
+                                class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Virtual
+                                Shows</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Products</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Corporate
+                                Shows</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">VIP
+                                Close-Up Magic</a></li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Virtual
+                                Experiences</a></li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Speaking &
+                                Workshops</a></li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Coaching &
+                                Consulting</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Stay updated with our latest news and insights.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email"
+                            class="flex-1 bg-black/50 border border-gray-700 rounded-l-lg py-2 px-4 focus:border-yellow-400 transition-colors duration-300">
+                        <button class="button-gradient px-6 rounded-r-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 Dan Chan. All rights reserved.</p>
+                <div class="flex space-x-6 text-sm">
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Privacy
+                        Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Terms of
+                        Service</a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 transition-colors duration-300">Cookie
+                        Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // First, add these helper functions at the start of your script section
+        function getOffsetTop(element) {
+            let offsetTop = 0;
+            while (element) {
+                offsetTop += element.offsetTop;
+                element = element.offsetParent;
+            }
+            return offsetTop;
+        }
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero section animations
+        const heroAnimation = gsap.timeline({ defaults: { ease: "power3.out" } });
+        gsap.set('body', { opacity: 1 }); // Setting default opacity using GSAP
+        heroAnimation
+            .from(".hero-background", {
+                scale: 1.2,
+                duration: 2.5,
+            })
+            .to(".hero-title", {
+                opacity: 1,
+                y: 0,
+                duration: 1.5,
+            }, "-=2")
+            .to(".hero-subtitle", {
+                opacity: 1,
+                y: 0,
+                duration: 1.5,
+            }, "-=1");
+
+        // Parallax effect on scroll
+        gsap.to(".hero-background", {
+            scrollTrigger: {
+                trigger: ".hero-container",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1
+            },
+            y: 200,
+            scale: 1.1
+        });
+
+        // Parallax Effect for sections with background images
+        gsap.utils.toArray('[data-parallax]').forEach(section => {
+            const bg = section.querySelector('.parallax-bg');
+
+            gsap.to(bg, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true
+                },
+                y: '30%',
+                ease: 'none'
+            });
+        });
+
+        // Section titles animation
+        gsap.utils.toArray('.section-title').forEach(title => {
+            gsap.from(title, {
+                scrollTrigger: {
+                    trigger: title,
+                    start: "top 80%",
+                    toggleActions: "play none none reset",
+                    scrub: false
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+        });
+
+        // Fixed animation for all content including iframes and cards
+        document.querySelectorAll('section').forEach(section => {
+            // Select all cards and iframes in the section
+            const cards = section.querySelectorAll('.card');
+            const iframes = section.querySelectorAll('.aspect-video iframe');
+            const forms = section.querySelectorAll('form');
+
+            // Animate cards
+            cards.forEach((card, index) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 80%",
+                        toggleActions: "play none none reset"
+                    },
+                    opacity: 0,
+                    y: 50,
+                    x: -30,
+                    duration: 0.8,
+                    delay: index * 0.2,
+                    ease: "power2.out"
+                });
+            });
+
+            // Animate iframes
+            iframes.forEach((iframe, index) => {
+                gsap.from(iframe.parentElement, {
+                    scrollTrigger: {
+                        trigger: iframe.parentElement,
+                        start: "top 80%",
+                        toggleActions: "play none none reset"
+                    },
+                    opacity: 0,
+                    y: 50,
+                    x: 30,
+                    duration: 0.8,
+                    delay: index * 0.2,
+                    ease: "power2.out"
+                });
+            });
+
+
+            // Animate forms
+            forms.forEach((form) => {
+                gsap.from(form, {
+                    scrollTrigger: {
+                        trigger: form,
+                        start: "top 80%",
+                        toggleActions: "play none none reset"
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.8,
+                    ease: "power2.out"
+                });
+            });
+        });
+
+        // Enhanced card hover animations
+        gsap.utils.toArray('.card').forEach(card => {
+            const hoverTl = gsap.timeline({ paused: true });
+
+            hoverTl.to(card, {
+                y: -10,
+                scale: 1.02,
+                duration: 0.3,
+                boxShadow: "0 25px 50px rgba(184, 134, 11, 0.3)",
+                ease: "power2.out"
+            });
+
+            card.addEventListener('mouseenter', () => hoverTl.play());
+            card.addEventListener('mouseleave', () => hoverTl.reverse());
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+            // Function to open menu
+            function openMenu() {
+                mobileMenu.style.display = 'flex';
+                setTimeout(() => {
+                    mobileMenu.classList.add('active');
+                }, 10);
+            }
+
+            // Function to close menu
+            function closeMenu() {
+                mobileMenu.classList.remove('active');
+                setTimeout(() => {
+                    mobileMenu.style.display = 'none';
+                }, 300); // Match this with the CSS transition time
+            }
+
+            // Toggle menu on burger click
+            mobileMenuButton.addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (mobileMenu.classList.contains('active')) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
+
+            // Close menu when clicking the close button
+            mobileMenuClose.addEventListener('click', closeMenu);
+
+            // Close menu when clicking a link
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function (e) {
+                if (mobileMenu.classList.contains('active') &&
+                    !mobileMenu.contains(e.target) &&
+                    e.target !== mobileMenuButton) {
+                    closeMenu();
+                }
+            });
+        });
+
+        // Smooth scroll functionality
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+
+                if (target) {
+                    const headerHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+
+                    window.scrollTo({
+                        top: targetPosition - headerHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for nav links highlight
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            rootMargin: '-50% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === `#${entry.target.id}`) {
+                            link.classList.add('text-yellow-600');
+                        } else {
+                            link.classList.remove('text-yellow-600');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Video lazy loading
+        document.addEventListener('DOMContentLoaded', function () {
+            const videos = document.querySelectorAll('iframe[src*="youtube.com"]');
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const video = entry.target;
+                        if (!video.src.includes('autoplay')) {
+                            video.src = video.src.replace('youtube.com', 'youtube-nocookie.com');
+                        }
+                        videoObserver.unobserve(video);
+                    }
+                });
+            }, {
+                rootMargin: '50px'
+            });
+
+            videos.forEach(video => videoObserver.observe(video));
+        });
+
+        // Form validation and submission
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = form.querySelector('input[type="text"]').value;
+            const email = form.querySelector('input[type="email"]').value;
+            const message = form.querySelector('textarea').value;
+
+            if (!name || !email || !message) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            // Here you would typically send the form data to your server
+            console.log('Form submitted:', { name, email, message });
+            alert('Thank you for your message. We will get back to you soon!');
+            form.reset();
+        });
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        // Handle ScrollTrigger refresh on resize
+        ScrollTrigger.addEventListener("refreshInit", () => gsap.set(".section", { clearProps: "all" }));
+        window.addEventListener("resize", () => {
+            ScrollTrigger.refresh();
+        });
+
+        // Add this after the existing GSAP animations
+        gsap.utils.toArray('.video-testimonial').forEach(testimonial => {
+            gsap.set(testimonial, { opacity: 0, y: 20 });
+
+            ScrollTrigger.create({
+                trigger: testimonial,
+                start: "top 80%",
+                onEnter: () => {
+                    gsap.to(testimonial, {
+                        opacity: 0.7,
+                        y: 0,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
+                },
+                onLeaveBack: () => {
+                    gsap.to(testimonial, {
+                        opacity: 0,
+                        y: 20,
+                        duration: 0.8,
+                        ease: "power2.in"
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        const testimonials = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            let currentTestimonial = 0;
+            let rotationInterval;
+
+            function showTestimonial(index, direction = 'right') {
+                // Get the current active slide
+                const currentSlide = document.querySelector('.testimonial-slide.active');
+                const nextSlide = testimonials[index];
+
+                // Remove all previous classes
+                testimonials.forEach(testimonial => {
+                    testimonial.classList.remove('active', 'previous');
+                });
+
+                // Add 'previous' class to the current slide
+                if (currentSlide) {
+                    currentSlide.classList.add('previous');
+                }
+
+                // Add 'active' class to the next slide
+                nextSlide.classList.add('active');
+
+                // Update dots
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[index].classList.add('active');
+            }
+
+            function nextTestimonial() {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }
+
+            function startRotation() {
+                if (rotationInterval) {
+                    clearInterval(rotationInterval);
+                }
+                showTestimonial(0);
+                rotationInterval = setInterval(nextTestimonial, 5000);
+            }
+
+            function stopRotation() {
+                if (rotationInterval) {
+                    clearInterval(rotationInterval);
+                    rotationInterval = null;
+                }
+            }
+
+            // Click handlers for dots
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentTestimonial = index;
+                    showTestimonial(currentTestimonial);
+
+                    if (rotationInterval) {
+                        stopRotation();
+                        startRotation();
+                    }
+                });
+            });
+
+            // Intersection Observer
+            const observer1 = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+                        startRotation();
+                    } else {
+                        stopRotation();
+
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            // Start observing the testimonial container
+            const testimonialContainer = document.querySelector('.testimonial-container');
+            observer1.observe(testimonialContainer);
+    </script>
+    <script>
+        const videoContainer = document.getElementById('video-container'); // Correct ID
+        const youtubeVideo = document.getElementById('youtube-video');   // Correct ID
+        let isPlaying = false;
+
+        const observer2 = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !isPlaying) {
+                    // Add autoplay when in viewport and not already playing
+                    youtubeVideo.src += "&autoplay=1";
+                    isPlaying = true;
+                    youtubeVideo.style.pointerEvents = "auto";
+                } else if (!entry.isIntersecting && isPlaying) {
+                    // Pause the video (logic explained below)
+                    isPlaying = false;
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer2.observe(videoContainer);
+    </script>
+
+</body>
+
+</html>
